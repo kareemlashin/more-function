@@ -1,0 +1,56 @@
+toShortFormat = function() {
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr",
+                        "May", "Jun", "Jul", "Aug",
+                        "Sep", "Oct", "Nov", "Dec"];
+    
+    const day = this.getDate();
+    
+    const monthIndex = this.getMonth();
+    const monthName = monthNames[monthIndex];
+    
+    const year = this.getFullYear();
+    
+    return `${day}-${monthName}-${year}`;  
+}
+var  getDateString = function(date, format) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        getPaddedComp = function(comp) {
+            return ((parseInt(comp) < 10) ? ('0' + comp) : comp)
+        },
+        formattedDate = format,
+        o = {
+            "y+": date.getFullYear(), // year
+            "M+": months[date.getMonth()], //month
+            "d+": getPaddedComp(date.getDate()), //day
+            "h+": getPaddedComp((date.getHours() > 12) ? date.getHours() % 12 : date.getHours()), //hour
+             "H+": getPaddedComp(date.getHours()), //hour
+            "m+": getPaddedComp(date.getMinutes()), //minute
+            "s+": getPaddedComp(date.getSeconds()), //second
+            "S+": getPaddedComp(date.getMilliseconds()), //millisecond,
+            "b+": (date.getHours() >= 12) ? 'PM' : 'AM'
+        };
+
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                formattedDate = formattedDate.replace(RegExp.$1, o[k]);
+            }
+        }
+        return formattedDate;
+    };
+    /*
+  #No parameters
+  returns a date with this format DD-MM-YYYY
+*/
+function now()
+{
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+
+  var output = (day<10 ? '0' : '') + day + "-" 
+              + (month<10 ? '0' : '') + month + '-'
+              + d.getFullYear();
+
+  return output;
+}
